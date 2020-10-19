@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Mauricio Urra",
+  "classifications": [ "webapi" ], 
+  "name": "Microservicio BCSA para Oracle",
+  "identity": "Microservicio.Oracle",         
+  "groupIdentity":"Microservicio.Oracle",
+  "shortName": "apioracle",
+  "tags": {
+    "language": "C#",
+    "type":"project"
+  },
+  "sourceName": "Arquetipo",
+  "preferNameDirectory": true
+}
