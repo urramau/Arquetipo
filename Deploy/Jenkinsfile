@@ -6,6 +6,7 @@ def jsonParse(def json) {
 pipeline {
   agent any
   environment {
+  	Servidor1= "C:\\inetpub\\www_api\\Arquetipo.API\\"
   	ProyectoApi= "Arquetipo.API\\Arquetipo.API.csproj"
   	ProyectoTesting="Arquetipo.Test\\Arquetipo.Test.csproj"
     dotnet ='C:\\Program Files (x86)\\dotnet\\'
@@ -27,16 +28,24 @@ pipeline {
 	      bat "dotnet build %ProyectoApi% --configuration Release"
 	    }
 	 }
-	stage('Test: Unit Test'){
+	/*stage('Test: Unit Test'){
 	   steps {
 	     bat "dotnet test %ProyectoTesting%"
 	     }
-	  }
+	  }*/
 	stage('Publish'){
 	     steps{
-	       bat "dotnet publish %ProyectoApi% "
+	       bat "dotnet publish %ProyectoApi% publish "
 	     }
-	}	      
+	}
+	stage('Publish IIS'){
+	     steps{
+	       bat "echo.>%Servidor1%offline.html"
+	       bat "Xcopy publish %Servidor1% /E /H /C /I"
+	       bat "del %Servidor1%offline.html"
+	     }
+	}	
+	
   }
   post {
       always {          
