@@ -35,13 +35,13 @@ pipeline {
 	  }*/
 	stage('Publish'){
 	     steps{
-	       bat "dotnet publish %ProyectoApi% publish "
+	       bat "dotnet publish %ProyectoApi% -o Publish "
 	     }
 	}
 	stage('Publish IIS'){
 	     steps{
 	       bat "echo.>%Servidor1%offline.html"
-	       bat "Xcopy publish %Servidor1% /E /H /C /I"
+	       bat "Xcopy Publish %Servidor1% /E /H /C /I"
 	       bat "del %Servidor1%offline.html"
 	     }
 	}	
