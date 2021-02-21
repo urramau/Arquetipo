@@ -4,20 +4,39 @@ def jsonParse(def json) {
     new groovy.json.JsonSlurperClassic().parseText(json)
 }
 pipeline {
-  agent { label 'master' }
+  agent any
   environment {
-    appName = "variable" 
+  	ProyectoApi= "Arquetipo.API\\Arquetipo.API.csproj"
+  	ProyectoTesting="Arquetipo.Test\\Arquetipo.Test.csproj"
+    dotnet ='C:\\Program Files (x86)\\dotnet\\'
+    
   }
   stages {
-
- stage("paso 1"){
-     
-      steps {
-          script {			
-           sh "echo 'hola mundo'"
-        }
-      }
-    }
+	stage('Restore packages'){
+	   steps{
+	      bat "dotnet restore"
+	     }
+	  }
+	stage('Clean'){
+	    steps{
+		bat "dotnet clean"
+	     }
+	   }	
+	stage('Build'){
+	   steps{
+	      bat "dotnet build %ProyectoApi% --configuration Release"
+	    }
+	 }
+	stage('Test: Unit Test'){
+	   steps {
+	     bat "dotnet test %ProyectoTesting%"
+	     }
+	  }
+	stage('Publish'){
+	     steps{
+	       bat "dotnet publish %ProyectoApi% "
+	     }
+	}	      
   }
   post {
       always {          
@@ -25,7 +44,7 @@ pipeline {
            sh "echo 'fase always'"
       }
       success {
-            sh "echo 'fase success'"
+            sh "echo 'Termino ok'"
         }
 
       failure {
