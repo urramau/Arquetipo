@@ -40,15 +40,15 @@ pipeline {
   }
   post {
       always {          
-          deleteDir()
-           sh "echo 'fase always'"
+          //deleteDir()
+           bat "echo 'fase always'"
       }
       success {
-            sh "echo 'Termino ok'"
+            bat "echo 'Termino ok'"
         }
 
       failure {
-            sh "echo 'fase failure'"
+            bat "echo 'fase failure'"
       }
       
   }
