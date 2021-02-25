@@ -9,7 +9,7 @@ pipeline {
   	Servidor1= "C:\\inetpub\\www_api\\Arquetipo.API\\"
   	ProyectoApi= "Arquetipo.API\\Arquetipo.API.csproj"
   	ProyectoTesting="Arquetipo.Test\\Arquetipo.Test.csproj"
-    dotnet ='C:\\Program Files (x86)\\dotnet\\'
+    	dotnet ='C:\\Program Files (x86)\\dotnet\\'
     
   }
   stages {
@@ -41,6 +41,7 @@ pipeline {
 	stage('Publish IIS'){
 	     steps{
 	       bat "echo.>%Servidor1%offline.html"
+	       sleep(5)
 	       bat "Xcopy Publish %Servidor1% /E /H /C /I"
 	       bat "del %Servidor1%offline.html"
 	     }
